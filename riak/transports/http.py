@@ -320,12 +320,7 @@ class RiakHttpTransport(RiakTransport) :
 
         # Add query parameters.
         if params is not None:
-            s = ''
-            for key in params.keys():
-                if s != '':
-                    s += '&'
-                s += urllib.quote_plus(key) + '=' + urllib.quote_plus(str(params[key]))
-            path += '?' + s
+            path += '?' + urllib.urlencode(params)
 
         # Return.
         return self._host, self._port, path
