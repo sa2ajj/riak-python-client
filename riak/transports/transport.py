@@ -30,7 +30,7 @@ class RiakTransport(object):
     """
 
     @classmethod
-    def make_random_client_id(self):
+    def make_random_client_id(cls):
         '''
         Returns a random client identifier
         '''
@@ -38,7 +38,7 @@ class RiakTransport(object):
                 str(random.randint(1, 1073741824)))
 
     @classmethod
-    def make_fixed_client_id(self):
+    def make_fixed_client_id(cls):
         '''
         Returns a unique identifier for the current machine/process/thread.
         '''

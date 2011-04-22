@@ -298,7 +298,7 @@ class RiakHttpTransport(RiakTransport) :
     Utility functions used by Riak library.
     """
     @classmethod
-    def get_value(self, key, array, defaultValue) :
+    def get_value(cls, key, array, defaultValue) :
         if key in array:
             return array[key]
         else:
@@ -326,20 +326,20 @@ class RiakHttpTransport(RiakTransport) :
         return self._host, self._port, path
 
     @classmethod
-    def http_request(self, method, host, port, url, headers = {}, obj = '') :
+    def http_request(cls, method, host, port, url, headers = {}, obj = '') :
         """
         Given a Method, URL, Headers, and Body, perform and HTTP request,
         and return an array of arity 2 containing an associative array of
         response headers and the response body.
         """
         if HAS_PYCURL:
-            return self.pycurl_request(method, host, port, url, headers, obj)
+            return cls.pycurl_request(method, host, port, url, headers, obj)
         else:
-            return self.httplib_request(method, host, port, url, headers, obj)
+            return cls.httplib_request(method, host, port, url, headers, obj)
 
 
     @classmethod
-    def httplib_request(self, method, host, port, uri, headers={}, body=''):
+    def httplib_request(cls, method, host, port, uri, headers={}, body=''):
         # Run the request...
         client = None
         response = None
@@ -368,12 +368,12 @@ class RiakHttpTransport(RiakTransport) :
 
 
     @classmethod
-    def pycurl_request(self, method, host, port, uri, headers={}, body=''):
+    def pycurl_request(cls, method, host, port, uri, headers={}, body=''):
         url = "http://" + host + ":" + str(port) + uri
         # Set up Curl...
         client = pycurl.Curl()
         client.setopt(pycurl.URL, url)
-        client.setopt(pycurl.HTTPHEADER, self.build_headers(headers))
+        client.setopt(pycurl.HTTPHEADER, cls.build_headers(headers))
         if method == 'GET':
             client.setopt(pycurl.HTTPGET, 1)
         elif method == 'POST':
@@ -400,7 +400,7 @@ class RiakHttpTransport(RiakTransport) :
             client.close()
 
             # Get the headers...
-            response_headers = self.parse_http_headers(response_headers_io.getvalue())
+            response_headers = cls.parse_http_headers(response_headers_io.getvalue())
             response_headers['http_code'] = http_code
 
             # Get the body...
@@ -413,14 +413,14 @@ class RiakHttpTransport(RiakTransport) :
             raise
 
     @classmethod
-    def build_headers(self, headers):
+    def build_headers(cls, headers):
         headers1 = []
         for key in headers.keys():
             headers1.append('%s: %s' % (key, headers[key]))
         return headers1
 
     @classmethod
-    def parse_http_headers(self, headers) :
+    def parse_http_headers(cls, headers) :
         """
         Parse an HTTP Header string into an asssociative array of
         response headers.
