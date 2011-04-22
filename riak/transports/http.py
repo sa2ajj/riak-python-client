@@ -106,13 +106,9 @@ class RiakHttpTransport(RiakTransport) :
 
         # Create the header from metadata
         links = robj.get_links()
-        if links != []:
-            headers['Link'] = ''
-            for link in links:
-                if headers['Link'] != '':
-                    headers['Link'] += ', '
-                headers['Link'] += self.to_link_header(link)
-
+        if links:
+            headers['Link'] = ', '.join([self.to_link_header(link) \
+                                                             for link in links])
         content = robj.get_encoded_data()
 
         # Run the operation.
