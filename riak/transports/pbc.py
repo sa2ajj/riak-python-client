@@ -234,7 +234,7 @@ class RiakPbcTransport(RiakTransport):
                 keys.append(key)
 
             if resp.HasField("done") and resp.done:
-                break;
+                break
 
         return keys
 
@@ -309,7 +309,7 @@ class RiakPbcTransport(RiakTransport):
                     result[resp.phase] = content
 
             if resp.HasField("done") and resp.done:
-                break;
+                break
 
         # If a single result - return the same as the HTTP interface does
         # otherwise return all the phase information

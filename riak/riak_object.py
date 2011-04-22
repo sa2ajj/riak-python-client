@@ -58,7 +58,7 @@ class RiakObject(object):
 
         :rtype: RiakBucket
         """
-        return self._bucket;
+        return self._bucket
 
     def get_key(self):
         """
