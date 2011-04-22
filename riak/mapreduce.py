@@ -58,7 +58,7 @@ class RiakMapReduce(object):
     def add_object(self, obj):
         return self.add_bucket_key_data(obj._bucket._name, obj._key, None)
 
-    def add_bucket_key_data(self, bucket, key, data) :
+    def add_bucket_key_data(self, bucket, key, data):
         if self._input_mode == 'bucket':
             raise Exception('Already added a bucket, can\'t add an object.')
         elif self._input_mode == 'search':
@@ -67,7 +67,7 @@ class RiakMapReduce(object):
             self._inputs.append([bucket, key, data])
             return self
 
-    def add_bucket(self, bucket) :
+    def add_bucket(self, bucket):
         self._input_mode = 'bucket'
         self._inputs = bucket
         return self

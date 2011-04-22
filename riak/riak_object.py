@@ -320,7 +320,7 @@ class RiakObject(object):
         self.clear()
         return self
 
-    def clear(self) :
+    def clear(self):
         """
         Reset this object.
 
@@ -333,7 +333,7 @@ class RiakObject(object):
         self._siblings = []
         return self
 
-    def vclock(self) :
+    def vclock(self):
         """
         Get the vclock of this object.
 
@@ -341,7 +341,7 @@ class RiakObject(object):
         """
         return self._vclock
 
-    def populate(self, Result) :
+    def populate(self, Result):
         """
         Populate the object based on the return from get.
 
@@ -376,7 +376,7 @@ class RiakObject(object):
         else:
             raise RiakError("do not know how to handle type " + str(type(Result)))
 
-    def populate_links(self, linkHeaders) :
+    def populate_links(self, linkHeaders):
         """
         Private.
 

@@ -30,7 +30,7 @@ See the unit_tests.py file for example usage.
 @author Jay Baird (@skatterbean) (jay@mochimedia.com)
 """
 
-class RiakError(Exception) :
+class RiakError(Exception):
         def __init__(self, value):
                 self.value = value
         def __str__(self):

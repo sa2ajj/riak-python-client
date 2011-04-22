@@ -36,7 +36,7 @@ from riak.metadata import *
 from riak.mapreduce import RiakLink
 from riak import RiakError
 
-class RiakHttpTransport(RiakTransport) :
+class RiakHttpTransport(RiakTransport):
     """
     The RiakHttpTransport object holds information necessary to connect to
     Riak. The Riak API uses HTTP, so there is no persistent
@@ -69,12 +69,12 @@ class RiakHttpTransport(RiakTransport) :
     """
     Check server is alive over HTTP
     """
-    def ping(self) :
+    def ping(self):
         response = self.http_request('GET', self._host, self._port, '/ping')
         return(response is not None) and (response[1] == 'OK')
 
 
-    def get(self, robj, r, vtag=None) :
+    def get(self, robj, r, vtag=None):
         """
         Get a bucket/key from the server
         """
@@ -280,7 +280,7 @@ class RiakHttpTransport(RiakTransport) :
         header += urllib.quote_plus(link.get_tag()) + '"'
         return header
 
-    def parse_links(self, links, linkHeaders) :
+    def parse_links(self, links, linkHeaders):
         """
         Private.
         @return self
@@ -298,13 +298,13 @@ class RiakHttpTransport(RiakTransport) :
     Utility functions used by Riak library.
     """
     @classmethod
-    def get_value(cls, key, array, defaultValue) :
+    def get_value(cls, key, array, defaultValue):
         if key in array:
             return array[key]
         else:
             return defaultValue
 
-    def build_rest_path(self, bucket, key=None, spec=None, params=None) :
+    def build_rest_path(self, bucket, key=None, spec=None, params=None):
         """
         Given a RiakClient, RiakBucket, Key, LinkSpec, and Params,
         construct and return a URL.
@@ -326,7 +326,7 @@ class RiakHttpTransport(RiakTransport) :
         return self._host, self._port, path
 
     @classmethod
-    def http_request(cls, method, host, port, url, headers={}, obj='') :
+    def http_request(cls, method, host, port, url, headers={}, obj=''):
         """
         Given a Method, URL, Headers, and Body, perform and HTTP request,
         and return an array of arity 2 containing an associative array of
@@ -420,7 +420,7 @@ class RiakHttpTransport(RiakTransport) :
         return headers1
 
     @classmethod
-    def parse_http_headers(cls, headers) :
+    def parse_http_headers(cls, headers):
         """
         Parse an HTTP Header string into an asssociative array of
         response headers.

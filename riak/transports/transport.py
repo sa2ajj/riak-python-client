@@ -76,14 +76,14 @@ class RiakTransport(object):
         """
         raise RiakError("not implemented")
 
-    def get_bucket_props(self, bucket) :
+    def get_bucket_props(self, bucket):
         """
         Serialize get bucket property request and deserialize response
         @return dict()
         """
         raise RiakError("not implemented")
 
-    def set_bucket_props(self, bucket, props) :
+    def set_bucket_props(self, bucket, props):
         """
         Serialize set bucket property request and deserialize response
         bucket = bucket object
@@ -92,7 +92,7 @@ class RiakTransport(object):
         """
         raise RiakError("not implemented")
 
-    def mapred(self, inputs, query, timeout=None) :
+    def mapred(self, inputs, query, timeout=None):
         """
         Serialize map/reduce request
         """

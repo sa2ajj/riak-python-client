@@ -445,7 +445,7 @@ class RiakPbcTransport(RiakTransport):
             metadata[MD_USERMETA] = usermeta
         return (metadata, rpb_content.value)
 
-    def pbify_content(self, metadata, data, rpb_content) :
+    def pbify_content(self, metadata, data, rpb_content):
         pbmetadata = {}
         # Convert the broken out fields, building up
         # pbmetadata for any unknown ones
