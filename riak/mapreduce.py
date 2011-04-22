@@ -177,7 +177,8 @@ class RiakMapReduce(object):
             phase = self._phases[i]
             if (i == (num_phases - 1)) and (not keep_flag):
                 phase._keep = True
-            if phase._keep: keep_flag = True
+            if phase._keep:
+                keep_flag = True
             query.append(phase.to_array())
 
         t = self._client.get_transport()

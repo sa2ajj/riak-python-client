@@ -109,7 +109,8 @@ class RiakHttpTransport(RiakTransport) :
         if links != []:
             headers['Link'] = ''
             for link in links:
-                if headers['Link'] != '': headers['Link'] += ', '
+                if headers['Link'] != '':
+                    headers['Link'] += ', '
                 headers['Link'] += self.to_link_header(link)
 
         content = robj.get_encoded_data()
@@ -325,7 +326,8 @@ class RiakHttpTransport(RiakTransport) :
         if (params is not None):
             s = ''
             for key in params.keys():
-                if (s != ''): s += '&'
+                if (s != ''):
+                    s += '&'
                 s += urllib.quote_plus(key) + '=' + urllib.quote_plus(str(params[key]))
             path += '?' + s
 
@@ -367,8 +369,10 @@ class RiakHttpTransport(RiakTransport) :
 
             return response_headers, response_body
         except:
-            if client is not None: client.close()
-            if response is not None: response.close()
+            if client is not None:
+                client.close()
+            if response is not None:
+                response.close()
             raise
 
 
@@ -413,7 +417,8 @@ class RiakHttpTransport(RiakTransport) :
 
             return response_headers, response_body
         except:
-            if (client is not None) : client.close()
+            if (client is not None):
+                client.close()
             raise
 
     @classmethod
@@ -433,7 +438,8 @@ class RiakHttpTransport(RiakTransport) :
         fields = headers.split("\n")
         for field in fields:
             matches = re.match("([^:]+):(.+)", field)
-            if (matches is None): continue
+            if (matches is None):
+                continue
             key = matches.group(1).lower()
             value = matches.group(2).strip()
             if (key in retVal.keys()):
