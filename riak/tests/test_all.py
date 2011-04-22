@@ -393,7 +393,7 @@ class BaseTestCase(object):
 
        # Run some operations...
         results = self.client.search("searchbucket", "foo:one OR foo:two").run()
-        if (len(results) == 0):
+        if len(results) == 0:
             print "\n\nNot running test \"testSearchIntegration()\".\n"
             print "Please ensure that you have installed the Riak Search hook on bucket \"searchbucket\" by running \"bin/search-cmd install searchbucket\".\n\n"
             return

@@ -385,7 +385,7 @@ class RiakObject(object):
         for linkHeader in linkHeaders.strip().split(','):
             linkHeader = linkHeader.strip()
             matches = re.match("\<\/([^\/]+)\/([^\/]+)\/([^\/]+)\>; ?riaktag=\"([^\']+)\"", linkHeader)
-            if (matches is not None):
+            if matches is not None:
                 link = RiakLink(matches.group(2), matches.group(3), matches.group(4))
                 self._links.append(link)
         return self

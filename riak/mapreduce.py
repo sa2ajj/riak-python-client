@@ -47,7 +47,7 @@ class RiakMapReduce(object):
         @param mixed arg3 - Arg or blank
         @return RiakMapReduce
         """
-        if (arg2 is None) and (arg3 is None):
+        if arg2 is None and arg3 is None:
             if isinstance(arg1, RiakObject):
                 return self.add_object(arg1)
             else:
@@ -161,7 +161,7 @@ class RiakMapReduce(object):
         num_phases = len(self._phases)
 
         # If there are no phases, then just echo the inputs back to the user.
-        if (num_phases == 0):
+        if num_phases == 0:
             self.reduce(["riak_kv_mapreduce", "reduce_identity"])
             num_phases = 1
             link_results_flag = True
@@ -193,9 +193,9 @@ class RiakMapReduce(object):
         # results to RiakLink objects.
         a = []
         for r in result:
-            if (len(r) == 2):
+            if len(r) == 2:
                 link = RiakLink(r[0], r[1])
-            elif (len(r) == 3):
+            elif len(r) == 3:
                 link = RiakLink(r[0], r[1], r[2])
             link._client = self._client
             a.append(link)
@@ -237,16 +237,16 @@ class RiakMapReducePhase(object):
                    'language':self._language,
                    'arg':self._arg}
 
-        if (self._language == 'javascript') and isinstance(self._function, list):
+        if self._language == 'javascript' and isinstance(self._function, list):
             stepdef['bucket'] = self._function[0]
             stepdef['key'] = self._function[1]
-        elif (self._language == 'javascript') and isinstance(self._function, str):
-            if ("{" in self._function):
+        elif self._language == 'javascript' and isinstance(self._function, str):
+            if "{" in self._function:
                 stepdef['source'] = self._function
             else:
                 stepdef['name'] = self._function
 
-        elif (self._language == 'erlang' and isinstance(self._function, list)):
+        elif self._language == 'erlang' and isinstance(self._function, list):
             stepdef['module'] = self._function[0]
             stepdef['function'] = self._function[1]
 
@@ -350,7 +350,7 @@ class RiakLink(object):
         Get the tag of this link.
         @return string
         """
-        if (self._tag is None):
+        if self._tag is None:
             return self._bucket
         else:
             return self._tag

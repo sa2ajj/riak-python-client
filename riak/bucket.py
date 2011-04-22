@@ -61,9 +61,9 @@ class RiakBucket(object):
 
         :rtype: integer
         """
-        if (r is not None):
+        if r is not None:
             return r
-        if (self._r is not None):
+        if self._r is not None:
             return self._r
         return self._client.get_r()
 
@@ -86,9 +86,9 @@ class RiakBucket(object):
 
         :rtype: integer
         """
-        if (w is not None):
+        if w is not None:
             return w
-        if (self._w is not None):
+        if self._w is not None:
             return self._w
         return self._client.get_w()
 
@@ -111,9 +111,9 @@ class RiakBucket(object):
 
         :rtype: integer
         """
-        if (dw is not None):
+        if dw is not None:
             return dw
-        if (self._dw is not None):
+        if self._dw is not None:
             return self._dw
         return self._client.get_dw()
 
@@ -136,9 +136,9 @@ class RiakBucket(object):
 
         :rtype: integer
         """
-        if (rw is not None):
+        if rw is not None:
             return rw
-        if (self._rw is not None):
+        if self._rw is not None:
             return self._rw
         return self._client.get_rw()
 
@@ -375,7 +375,7 @@ class RiakBucket(object):
         :rtype: mixed
         """
         props = self.get_properties()
-        if (key in props.keys()):
+        if key in props.keys():
             return props[key]
 
     def set_properties(self, props):

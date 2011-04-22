@@ -101,7 +101,7 @@ class RiakHttpTransport(RiakTransport) :
                    'X-Riak-ClientId' : self._client_id}
 
         # Add the vclock if it exists...
-        if (robj.vclock() is not None):
+        if robj.vclock() is not None:
             headers['X-Riak-Vclock'] = robj.vclock()
 
         # Create the header from metadata
@@ -141,7 +141,7 @@ class RiakHttpTransport(RiakTransport) :
 
         headers = response[0]
         encoded_props = response[1]
-        if (headers['http_code'] == 200):
+        if headers['http_code'] == 200:
             props = json.loads(encoded_props)
             return props['keys']
         else:
@@ -155,7 +155,7 @@ class RiakHttpTransport(RiakTransport) :
 
         headers = response[0]
         encoded_props = response[1]
-        if (headers['http_code'] == 200):
+        if headers['http_code'] == 200:
             props = json.loads(encoded_props)
             return props['props']
         else:
@@ -174,12 +174,12 @@ class RiakHttpTransport(RiakTransport) :
         response = self.http_request('PUT', host, port, url, headers, content)
 
         # Handle the response...
-        if (response is None):
+        if response is None:
             raise Exception('Error setting bucket properties.')
 
         # Check the response value...
         status = response[0]['http_code']
-        if (status != 204):
+        if status != 204:
             raise Exception('Error setting bucket properties.')
         return True
 
@@ -202,7 +202,7 @@ class RiakHttpTransport(RiakTransport) :
 
     def check_http_code(self, response, expected_statuses):
         status = response[0]['http_code']
-        if (not status in expected_statuses):
+        if status not in expected_statuses:
             m = 'Expected status ' + str(expected_statuses) + ', received ' + str(status)
             raise Exception(m)
 
@@ -214,7 +214,7 @@ class RiakHttpTransport(RiakTransport) :
         @return self
         """
         # If no response given, then return.
-        if (response is None):
+        if response is None:
             return self
 
         # Make sure expected code came back
@@ -226,21 +226,21 @@ class RiakHttpTransport(RiakTransport) :
         status = headers['http_code']
 
         # Check if the server is down(status==0)
-        if (status == 0):
+        if status == 0:
             m = 'Could not contact Riak Server: http://' + self._host + ':' + str(self._port) + '!'
             raise RiakError(m)
 
         # Verify that we got one of the expected statuses. Otherwise, raise an exception.
-        if (not status in expected_statuses):
+        if status not in expected_statuses:
             m = 'Expected status ' + str(expected_statuses) + ', received ' + str(status)
             raise RiakError(m)
 
         # If 404(Not Found), then clear the object.
-        if (status == 404):
+        if status == 404:
             return None
 
         # If 300(Siblings), then return the list of siblings
-        elif (status == 300):
+        elif status == 300:
             # Parse and get rid of 'Siblings:' string in element 0
             siblings = data.strip().split('\n')
             siblings.pop(0)
@@ -292,7 +292,7 @@ class RiakHttpTransport(RiakTransport) :
         for linkHeader in linkHeaders.strip().split(','):
             linkHeader = linkHeader.strip()
             matches = re.match("\<\/([^\/]+)\/([^\/]+)\/([^\/]+)\>; ?riaktag=\"([^\']+)\"", linkHeader)
-            if (matches is not None):
+            if matches is not None:
                 link = RiakLink(matches.group(2), matches.group(3), matches.group(4))
                 links.append(link)
         return self
@@ -303,7 +303,7 @@ class RiakHttpTransport(RiakTransport) :
     """
     @classmethod
     def get_value(self, key, array, defaultValue) :
-        if (key in array):
+        if key in array:
             return array[key]
         else:
             return defaultValue
@@ -319,14 +319,14 @@ class RiakHttpTransport(RiakTransport) :
         path += '/' + urllib.quote_plus(bucket._name)
 
         # Add '.../key'
-        if (key is not None):
+        if key is not None:
             path += '/' + urllib.quote_plus(key)
 
         # Add query parameters.
-        if (params is not None):
+        if params is not None:
             s = ''
             for key in params.keys():
-                if (s != ''):
+                if s != '':
                     s += '&'
                 s += urllib.quote_plus(key) + '=' + urllib.quote_plus(str(params[key]))
             path += '?' + s
@@ -417,7 +417,7 @@ class RiakHttpTransport(RiakTransport) :
 
             return response_headers, response_body
         except:
-            if (client is not None):
+            if client is not None:
                 client.close()
             raise
 
@@ -438,11 +438,11 @@ class RiakHttpTransport(RiakTransport) :
         fields = headers.split("\n")
         for field in fields:
             matches = re.match("([^:]+):(.+)", field)
-            if (matches is None):
+            if matches is None:
                 continue
             key = matches.group(1).lower()
             value = matches.group(2).strip()
-            if (key in retVal.keys()):
+            if key in retVal.keys():
                 if  isinstance(retVal[key], list):
                     retVal[key].append(value)
                 else:
