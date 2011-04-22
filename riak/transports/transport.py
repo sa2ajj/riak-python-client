@@ -54,14 +54,14 @@ class RiakTransport(object):
         """
         raise RiakError("not implemented")
 
-    def get(self, robj, r = None, vtag = None):
+    def get(self, robj, r=None, vtag=None):
         """
         Serialize get request and deserialize response
         @return (vclock=None, [(metadata, value)]=None)
         """
         raise RiakError("not implemented")
 
-    def put(self, robj, w = None, dw = None, return_body = True):
+    def put(self, robj, w=None, dw=None, return_body=True):
         """
         Serialize put request and deserialize response - if 'content'
         is true, retrieve the updated metadata/content
@@ -69,7 +69,7 @@ class RiakTransport(object):
         """
         raise RiakError("not implemented")
 
-    def delete(self, robj, rw = None):
+    def delete(self, robj, rw=None):
         """
         Serialize delete request and deserialize response
         @return true
@@ -92,7 +92,7 @@ class RiakTransport(object):
         """
         raise RiakError("not implemented")
 
-    def mapred(self, inputs, query, timeout = None) :
+    def mapred(self, inputs, query, timeout=None) :
         """
         Serialize map/reduce request
         """

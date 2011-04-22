@@ -74,7 +74,7 @@ class RiakHttpTransport(RiakTransport) :
         return(response is not None) and (response[1] == 'OK')
 
 
-    def get(self, robj, r, vtag = None) :
+    def get(self, robj, r, vtag=None) :
         """
         Get a bucket/key from the server
         """
@@ -86,7 +86,7 @@ class RiakHttpTransport(RiakTransport) :
         response = self.http_request('GET', host, port, url)
         return self.parse_body(response, [200, 300, 404])
 
-    def put(self, robj, w = None, dw = None, return_body = True):
+    def put(self, robj, w=None, dw=None, return_body=True):
         """
         Serialize put request and deserialize response
         """
@@ -326,7 +326,7 @@ class RiakHttpTransport(RiakTransport) :
         return self._host, self._port, path
 
     @classmethod
-    def http_request(cls, method, host, port, url, headers = {}, obj = '') :
+    def http_request(cls, method, host, port, url, headers={}, obj='') :
         """
         Given a Method, URL, Headers, and Body, perform and HTTP request,
         and return an array of arity 2 containing an associative array of

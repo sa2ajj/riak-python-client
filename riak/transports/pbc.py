@@ -137,7 +137,7 @@ class RiakPbcTransport(RiakTransport):
         else:
             raise RiakError("unexpected protocol buffer message code: ", msg_code)
 
-    def get(self, robj, r = None, vtag = None):
+    def get(self, robj, r=None, vtag=None):
         """
         Serialize get request and deserialize response
         """
@@ -165,7 +165,7 @@ class RiakPbcTransport(RiakTransport):
 
         return 0
 
-    def put(self, robj, w = None, dw = None, return_body = True):
+    def put(self, robj, w=None, dw=None, return_body=True):
         """
         Serialize get request and deserialize response
         """
@@ -196,7 +196,7 @@ class RiakPbcTransport(RiakTransport):
                 contents.append(self.decode_content(c))
             return (resp.vclock, contents)
 
-    def delete(self, robj, rw = None):
+    def delete(self, robj, rw=None):
         """
         Serialize get request and deserialize response
         """
