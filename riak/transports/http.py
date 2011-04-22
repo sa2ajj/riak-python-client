@@ -272,13 +272,11 @@ class RiakHttpTransport(RiakTransport):
         """
         Convert this RiakLink object to a link header string. Used internally.
         """
-        header = ''
-        header += '</'
-        header += self._prefix + '/'
-        header += urllib.quote_plus(link.get_bucket()) + '/'
-        header += urllib.quote_plus(link.get_key()) + '>; riaktag="'
-        header += urllib.quote_plus(link.get_tag()) + '"'
-        return header
+        return '</%s/%s/%s>; riaktag="%s"' % \
+                    (self._prefix,
+                     urllib.quote_plus(link.get_bucket()),
+                     urllib.quote_plus(link.get_key()),
+                     urllib.quote_plus(link.get_tag()))
 
     def parse_links(self, links, linkHeaders):
         """
@@ -310,9 +308,7 @@ class RiakHttpTransport(RiakTransport):
         construct and return a URL.
         """
         # Build 'http://hostname:port/prefix/bucket'
-        path = ''
-        path += '/' + self._prefix
-        path += '/' + urllib.quote_plus(bucket._name)
+        path = '/%s/%s' % (self._prefix, urllib.quote_plus(bucket._name))
 
         # Add '.../key'
         if key is not None:
